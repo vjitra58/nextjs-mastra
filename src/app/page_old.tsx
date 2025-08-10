@@ -257,137 +257,136 @@ export default function WeatherDemo() {
           </div>
         </div>
 
-        {/* Results */}
-        {(response || streamResponse || loading) && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-center border-b pb-2">Results</h2>
-            
-            <div className="grid lg:grid-cols-2 gap-6">
-              {/* Regular Response */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-800 flex items-center">
-                      <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                      </svg>
-                      Response
-                    </h3>
-                    {response && (
-                      <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded-full">
-                        ✓ Complete
-                      </span>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  {loading && !response ? (
-                    <div className="flex items-center justify-center py-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-                      <span className="ml-3 text-gray-600">Processing your request...</span>
-                    </div>
-                  ) : response ? (
-                    <div className="space-y-3">
-                      <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500">
-                        <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono leading-relaxed overflow-auto max-h-80">
-                          {response}
-                        </pre>
-                      </div>
-                      <div className="flex justify-between items-center text-xs text-gray-500">
-                        <span>Response received at {new Date().toLocaleTimeString()}</span>
-                        <button
-                          onClick={() => navigator.clipboard.writeText(response)}
-                          className="text-blue-600 hover:text-blue-800 flex items-center"
-                        >
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                          </svg>
-                          Copy
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                      </svg>
-                      <p className="text-gray-500 text-sm">No response yet...</p>
-                      <p className="text-gray-400 text-xs mt-1">Submit a request to see results here</p>
-                    </div>
+      {/* Results */}
+      {(response || streamResponse || loading) && (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-semibold text-center border-b pb-2">Results</h2>
+          
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Regular Response */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    Response
+                  </h3>
+                  {response && (
+                    <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                      ✓ Complete
+                    </span>
                   )}
                 </div>
               </div>
-
-              {/* Streaming Response */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-6 py-4 border-b border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-800 flex items-center">
-                      <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      Streaming Response
-                    </h3>
-                    {streamResponse && (
-                      <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
-                        {loading ? '⚡ Streaming...' : '✓ Complete'}
-                      </span>
-                    )}
+              
+              <div className="p-6">
+                {loading && !response ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <span className="ml-3 text-gray-600">Processing your request...</span>
                   </div>
-                </div>
-                
-                <div className="p-6">
-                  {loading && !streamResponse ? (
-                    <div className="flex items-center justify-center py-8">
-                      <div className="animate-pulse flex space-x-1">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                        <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                      </div>
-                      <span className="ml-3 text-gray-600">Streaming response...</span>
+                ) : response ? (
+                  <div className="space-y-3">
+                    <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500">
+                      <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono leading-relaxed overflow-auto max-h-80">
+                        {response}
+                      </pre>
                     </div>
-                  ) : streamResponse ? (
-                    <div className="space-y-3">
-                      <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-purple-500">
-                        <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono leading-relaxed overflow-auto max-h-80">
-                          {streamResponse}
-                        </pre>
-                        {loading && (
-                          <div className="mt-2 flex items-center text-purple-600">
-                            <div className="animate-pulse w-2 h-2 bg-purple-600 rounded-full mr-2"></div>
-                            <span className="text-xs">Streaming in progress...</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex justify-between items-center text-xs text-gray-500">
-                        <span>Stream started at {new Date().toLocaleTimeString()}</span>
-                        <button
-                          onClick={() => navigator.clipboard.writeText(streamResponse)}
-                          className="text-purple-600 hover:text-purple-800 flex items-center"
-                        >
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                          </svg>
-                          Copy
-                        </button>
-                      </div>
+                    <div className="flex justify-between items-center text-xs text-gray-500">
+                      <span>Response received at {new Date().toLocaleTimeString()}</span>
+                      <button
+                        onClick={() => navigator.clipboard.writeText(response)}
+                        className="text-blue-600 hover:text-blue-800 flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy
+                      </button>
                     </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      <p className="text-gray-500 text-sm">No streaming response yet...</p>
-                      <p className="text-gray-400 text-xs mt-1">Use the streaming API to see real-time results</p>
-                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <p className="text-gray-500 text-sm">No response yet...</p>
+                    <p className="text-gray-400 text-xs mt-1">Submit a request to see results here</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Streaming Response */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-6 py-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Streaming Response
+                  </h3>
+                  {streamResponse && (
+                    <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
+                      {loading ? '⚡ Streaming...' : '✓ Complete'}
+                    </span>
                   )}
                 </div>
+              </div>
+              
+              <div className="p-6">
+                {loading && !streamResponse ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-pulse flex space-x-1">
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    </div>
+                    <span className="ml-3 text-gray-600">Streaming response...</span>
+                  </div>
+                ) : streamResponse ? (
+                  <div className="space-y-3">
+                    <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-purple-500">
+                      <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono leading-relaxed overflow-auto max-h-80">
+                        {streamResponse}
+                      </pre>
+                      {loading && (
+                        <div className="mt-2 flex items-center text-purple-600">
+                          <div className="animate-pulse w-2 h-2 bg-purple-600 rounded-full mr-2"></div>
+                          <span className="text-xs">Streaming in progress...</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex justify-between items-center text-xs text-gray-500">
+                      <span>Stream started at {new Date().toLocaleTimeString()}</span>
+                      <button
+                        onClick={() => navigator.clipboard.writeText(streamResponse)}
+                        className="text-purple-600 hover:text-purple-800 flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <p className="text-gray-500 text-sm">No streaming response yet...</p>
+                    <p className="text-gray-400 text-xs mt-1">Use the streaming API to see real-time results</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
